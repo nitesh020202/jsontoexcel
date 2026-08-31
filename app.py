@@ -62,10 +62,12 @@ if uploaded_file is not None:
         with pd.ExcelWriter(output, engine="openpyxl") as writer:
             df.to_excel(writer, index=False, sheet_name="Sheet1")
 
+        output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.xlsx"
+
         st.download_button(
             label="📥 Download Excel File",
             data=output.getvalue(),
-            file_name="converted.xlsx",
+            file_name=output_filename,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
 
